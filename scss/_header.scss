@@ -1,0 +1,57 @@
+@use "sass:map";
+@use "variables" as *;
+@use "theme" as *;
+
+.header {
+  padding: $spacing-lg;
+  text-align: center;
+  transition: background-color $transition-duration $transition-easing;
+
+  @include themed using ($theme) {
+    background-color: map.get($theme, primary);
+    color: map.get($theme, on-primary);
+  }
+
+  h1 {
+    font-size: $font-size-h1;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.nav {
+  padding: $spacing-md 0;
+  text-align: center;
+  transition: background-color $transition-duration $transition-easing;
+
+  @include themed using ($theme) {
+    background-color: map.get($theme, secondary);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+
+    li {
+      margin: 0 $spacing-md;
+
+      a {
+        text-decoration: none;
+        font-weight: $font-weight-bold;
+        padding: $spacing-sm;
+        transition: color $transition-duration $transition-easing;
+
+        @include themed using ($theme) {
+          color: map.get($theme, on-secondary);
+
+          &:hover,
+          &:focus-visible {
+            color: map.get($theme, accent);
+          }
+        }
+      }
+    }
+  }
+}

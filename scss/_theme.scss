@@ -1,0 +1,65 @@
+@use "sass:map";
+// ==========================================================================
+// Définition des thèmes avec couleurs
+// Chaque thème doit définir exactement les mêmes clés.
+// ==========================================================================
+
+$light-theme: (
+  bg: #f5f7fa,
+  text: #222222,
+
+  // Surfaces (cartes, panneaux…)
+  surface: #ffffff,
+  on-surface: #222222,
+  shadow: rgba(0, 0, 0, 0.1),
+
+  // Couleur principale (header, boutons…)
+  primary: #3498db,
+  primary-hover: #2980b9,
+  on-primary: #ffffff,
+
+  // Couleur secondaire (navigation…)
+  secondary: #2c3e50,
+  secondary-hover: #1f2d3a,
+  on-secondary: #ffffff,
+
+  // Couleur d'accentuation (survol des liens…)
+  accent: #f1c40f,
+);
+
+$dark-theme: (
+  bg: #121212,
+  text: #eeeeee,
+
+  surface: #1e1e1e,
+  on-surface: #eeeeee,
+  shadow: rgba(0, 0, 0, 0.6),
+
+  primary: #1f6fa8,
+  primary-hover: #3498db,
+  on-primary: #ffffff,
+
+  secondary: #0f1923,
+  secondary-hover: #1c2b38,
+  on-secondary: #ecf0f1,
+
+  accent: #f39c12,
+);
+
+// ==========================================================================
+// Applique un bloc de styles pour chaque thème.
+// Le bloc reçoit la map du thème courant, à lire avec map.get() :
+//
+//   @include themed using ($theme) {
+//     color: map.get($theme, text);
+//   }
+//
+// Génère : .selecteur { … clair … }  .dark-mode .selecteur { … sombre … }
+// ==========================================================================
+@mixin themed {
+  @content ($light-theme);
+
+  .dark-mode & {
+    @content ($dark-theme);
+  }
+}

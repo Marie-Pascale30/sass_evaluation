@@ -1,0 +1,75 @@
+@use "sass:map";
+@use "variables" as *;
+@use "theme" as *;
+
+// ==========================================================================
+// Bouton
+// $variant : nom d'une couleur du thème (primary, secondary…).
+// Le thème doit définir les clés "<variant>", "<variant>-hover" et "on-<variant>".
+//
+//   .button            { @include button; }              // style complet
+//   .button--secondary { @include button-colors(secondary); } // couleurs seules
+// ==========================================================================
+@mixin button-colors($variant: primary) {
+  @include themed using ($theme) {
+    background-color: map.get($theme, $variant);
+    color: map.get($theme, "on-#{$variant}");
+
+    &:hover,
+    &:focus-visible {
+      background-color: map.get($theme, "#{$variant}-hover");
+    }
+  }
+}
+
+@mixin button(
+  $variant: primary,
+  $padding: $padding-base,
+  $radius: $border-radius
+) {
+  padding: $padding;
+  border-radius: $radius;
+  border: none;
+  cursor: pointer;
+  font-size: $font-size-base;
+  font-family: inherit;
+  transition:
+    background-color $transition-duration $transition-easing,
+    color $transition-duration $transition-easing;
+
+  @include button-colors($variant);
+}
+
+// ==========================================================================
+// Carte
+// $bg-key / $text-key : clés de couleur du thème pour le fond et le texte.
+//
+//   .card          { @include card; }                             // style complet
+//   .card--primary { @include card-colors(primary, on-primary); } // couleurs seules
+// ==========================================================================
+@mixin card-colors($bg-key: surface, $text-key: on-surface) {
+  @include themed using ($theme) {
+    background-color: map.get($theme, $bg-key);
+    color: map.get($theme, $text-key);
+    box-shadow: $shadow-offset map.get($theme, shadow);
+  }
+}
+
+@mixin card(
+  $bg-key: surface,
+  $text-key: on-surface,
+  $padding: $spacing-lg,
+  $radius: $border-radius-lg,
+  $align: center
+) {
+  margin-top: $spacing-md;
+  padding: $padding;
+  border-radius: $radius;
+  text-align: $align;
+  transition:
+    background-color $transition-duration $transition-easing,
+    color $transition-duration $transition-easing,
+    box-shadow $transition-duration $transition-easing;
+
+  @include card-colors($bg-key, $text-key);
+}

@@ -1,0 +1,53 @@
+@use "sass:map";
+@use "variables" as *;
+@use "mixins" as *;
+@use "theme" as *;
+@use "header" as *;
+
+// ==========================================================================
+// Base
+// La classe .dark-mode est posée directement sur <body> par js/script.js,
+// d'où &.dark-mode ici (les autres éléments utilisent le mixin themed).
+// ==========================================================================
+body {
+  background-color: map.get($light-theme, bg);
+  color: map.get($light-theme, text);
+  font-family: $font-family-base;
+  margin: 0;
+  transition:
+    background-color $transition-duration $transition-easing,
+    color $transition-duration $transition-easing;
+
+  &.dark-mode {
+    background-color: map.get($dark-theme, bg);
+    color: map.get($dark-theme, text);
+  }
+}
+
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: $spacing-lg;
+}
+
+// ==========================================================================
+// Boutons
+// ==========================================================================
+.button {
+  @include button;
+
+  &--secondary {
+    @include button-colors(secondary);
+  }
+}
+
+// ==========================================================================
+// Cartes
+// ==========================================================================
+.card {
+  @include card;
+
+  &--primary {
+    @include card-colors(primary, on-primary);
+  }
+}

@@ -1,0 +1,32 @@
+// ==========================================================================
+// Variables globales (hors couleurs : voir _theme.scss)
+// ==========================================================================
+
+// Typographie
+$font-family-base: Arial, sans-serif;
+$font-size-base: 16px;
+$font-size-h1: 24px;
+$font-weight-bold: bold;
+
+// Espacements
+$spacing-xs: 5px;
+$spacing-sm: 10px;
+$spacing-md: 15px;
+$spacing-lg: 20px;
+$spacing-xl: 24px;
+
+$padding-base: 12px $spacing-xl;
+
+// Mise en page
+$container-max-width: 1100px;
+
+// Bordures
+$border-radius: 5px;
+$border-radius-lg: 8px;
+
+// Ombres (la couleur est gérée par le thème)
+$shadow-offset: 2px 2px 10px;
+
+// Transitions
+$transition-duration: 0.3s;
+$transition-easing: ease;
